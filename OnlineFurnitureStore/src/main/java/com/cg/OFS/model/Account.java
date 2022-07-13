@@ -12,6 +12,10 @@ public class Account {
 	private String accountNo;
 	@Column(name="Account Balance", length=30)
 	private String accountBalance;
+	@ManyToOne
+	private Customer customer;
+	@OneToOne
+	private Card card;
 	
 	public Account() {
 		super();

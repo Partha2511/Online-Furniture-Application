@@ -1,5 +1,6 @@
 package com.cg.OFS.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -16,7 +17,7 @@ public class Review {
 	@Column(name="review_rating")
 	private int reviewRating;
 	
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Furniture furniture;
 	
 	public Review() {

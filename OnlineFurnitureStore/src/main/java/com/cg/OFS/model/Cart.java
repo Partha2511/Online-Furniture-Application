@@ -2,11 +2,14 @@ package com.cg.OFS.model;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -19,12 +22,15 @@ public class Cart {
 	@Column(name = "CartName")
 	private String orderId;
 	
-	@OneToOne(mappedBy="cart")
+	@OneToOne
     private Customer customer;
 	
 	
-	@OneToMany(mappedBy="cart",cascade=CascadeType.ALL)
-	private List<Furniture> furniture = new ArrayList<Furniture>();
+	@ManyToMany(cascade=CascadeType.ALL)
+	@JoinTable(name="cart_furniture"
+	,joinColumns= {@JoinColumn(name="card_id")}
+	,inverseJoinColumns= {@JoinColumn(name="furniture_id")})
+	private List<Furniture> furnitures = new ArrayList<Furniture>();
 	
 	@Column(name = "Quantity")
     private int quantity;

@@ -3,7 +3,6 @@ package com.cg.OFS.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 @Entity
 @Table(name="user_tbl")
@@ -18,8 +17,8 @@ public class User {
 	@Column(name="role")
 	private String role;
 	
-	@OneToOne
-	private Customer customer;
+//	@OneToOne
+//	private Customer customer;
 	
 	public User() {
 		// TODO Auto-generated constructor stub

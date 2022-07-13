@@ -7,8 +7,7 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,12 +31,11 @@ public class Furniture {
     private double price;
 
 	
-	@OneToMany(mappedBy="furniture")
+	@OneToMany(mappedBy="furniture",cascade=CascadeType.ALL)
 	private List<Review> feedBacks = new ArrayList<Review>();
 	
-	@ManyToOne(cascade=CascadeType.ALL)
-	@JoinColumn(name="cart_id")
-	private Cart cart;
+	@ManyToMany(mappedBy="furnitures",cascade=CascadeType.ALL)
+	private List<Cart> carts=new ArrayList<Cart>();
 	
 	public Furniture() {
 		

@@ -42,7 +42,7 @@ public class Order {
 	private String status;
 	
 	@OneToOne
-	private Card card;
+	private Bill bill;
 
 	
 	public 	Order() {
@@ -51,7 +51,7 @@ public class Order {
 	
 
 	public Order(String orderId, Date orderDate, Furniture furniture, Customer customer, int quanity, double price,
-			double amount, String status, Card card) {
+			double amount, String status) {
 		super();
 		this.orderId = orderId;
 		this.orderDate = orderDate;
@@ -61,7 +61,6 @@ public class Order {
 		this.price = price;
 		this.amount = amount;
 		this.status = status;
-		this.card = card;
 	}
 
 
@@ -142,20 +141,6 @@ public class Order {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-
-	public Card getCard() {
-		return card;
-	}
-
-
-	public void setCard(Card card) {
-		this.card = card;
-	}
-	
-	
-	
-	
+	}	
 	
 }

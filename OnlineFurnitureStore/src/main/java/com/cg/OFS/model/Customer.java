@@ -1,5 +1,8 @@
 package com.cg.OFS.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,40 +15,24 @@ import javax.persistence.Table;
 public class Customer extends User{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-	private Address address;
+	private List<Address> addresses=new ArrayList<Address>();
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
-	private Account account;
+	private List<Account> accounts=new ArrayList<Account>();
 	@Column(name="Mobile No", length=30)
 	private String mobileNo;
 	@Column(name="Email", length=30)
 	private String email;
+	@OneToOne
+	private Cart cart;
 	
 	public Customer() {
 		super();
 	}
 
-	public Customer(Address address, Account account, String mobileNo, String email, Review review) {
-		super();
-		this.address = address;
-		this.account = account;
+	public Customer(int uid, String username, String password, String role,String mobileNo, String email, Review review) {
+		super(uid,username,password,role);
 		this.mobileNo = mobileNo;
 		this.email = email;
-	}
-
-	public Address getAddress() {
-		return address;
-	}
-
-	public void setAddress(Address address) {
-		this.address = address;
-	}
-
-	public Account getAccount() {
-		return account;
-	}
-
-	public void setAccount(Account account) {
-		this.account = account;
 	}
 
 	public String getMobileNo() {

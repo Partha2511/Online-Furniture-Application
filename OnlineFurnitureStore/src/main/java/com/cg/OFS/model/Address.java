@@ -15,6 +15,8 @@ public class Address {
 	private String country;
 	@Column(name="Pincode", length=30)
 	private String pincode;
+	@ManyToOne
+	private Customer customer;
 	
 	public Address() {
 		super();

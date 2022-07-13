@@ -3,6 +3,7 @@ package com.cg.OFS.model;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -26,6 +27,10 @@ public class Bill {
 	
 	@Column(name="Amount")
     private double amount;
+	
+	@OneToOne
+	private Order order;
+	
 	public long getBillNo() {
 		return billNo;
 	}
