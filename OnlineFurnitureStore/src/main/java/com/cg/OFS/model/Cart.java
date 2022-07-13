@@ -25,6 +25,7 @@ public class Cart {
 	@OneToOne
     private Customer customer;
 	
+
 	
 	@ManyToMany(cascade=CascadeType.ALL)
 	@JoinTable(name="cart_furniture"
