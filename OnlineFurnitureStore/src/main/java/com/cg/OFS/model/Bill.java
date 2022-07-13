@@ -1,12 +1,30 @@
 package com.cg.OFS.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="Bill_tbl")
 public class Bill {
 	
+	@Id
+	@Column(name="BillNo")
 	private long billNo;
+	
+	@Column(name="Customer_Name")
 	private String customerName;
+	
 	private Furniture furniture;
+	
+	@Column(name="Quantity")
 	private int quanity;
+	
+	@Column(name="Price")
     private double price;
+	
+	@Column(name="Amount")
     private double amount;
 	public long getBillNo() {
 		return billNo;
