@@ -22,9 +22,8 @@ public class Cart {
 	@OneToOne(mappedBy="cart")
     private Customer customer;
 	
-	
 	@OneToMany(mappedBy="cart",cascade=CascadeType.ALL)
-	private List<Furniture> furniture = new ArrayList<Furniture>();
+	private List<Furniture> furnitures = new ArrayList<Furniture>();
 	
 	@Column(name = "Quantity")
     private int quantity;
