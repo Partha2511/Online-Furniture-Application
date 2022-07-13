@@ -1,7 +1,7 @@
 package com.cg.OFS.model;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -29,12 +29,13 @@ public class Furniture {
 	@Column(name = "Price")
     private double price;
 	
-	@OneToMany(mappedBy="furniture",cascade=CascadeType.ALL)
-	private Set<Feedback> feedBack = new HashSet<Feedback>();
+	@OneToMany(mappedBy="furniture")
+	private List<Review> feedBacks = new ArrayList<Review>();
 	
 	@ManyToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="cart_id")
 	private Cart cart;
+	
 	public Furniture() {
 		
 	}
