@@ -1,20 +1,24 @@
 package com.cg.OFS.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="Customer_tbl")
 public class Customer extends User{
 	
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Address address;
+	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private Account account;
 	@Column(name="Mobile No", length=30)
 	private String mobileNo;
 	@Column(name="Email", length=30)
 	private String email;
-	private Review review;
 	
 	public Customer() {
 		super();
@@ -26,7 +30,6 @@ public class Customer extends User{
 		this.account = account;
 		this.mobileNo = mobileNo;
 		this.email = email;
-		this.review = review;
 	}
 
 	public Address getAddress() {
@@ -61,19 +64,5 @@ public class Customer extends User{
 		this.email = email;
 	}
 
-	public Review getReview() {
-		return review;
-	}
-
-	public void setReview(Review review) {
-		this.review = review;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer [address=" + address + ", account=" + account + ", mobileNo=" + mobileNo + ", email=" + email
-				+ ", review=" + review + "]";
-	}
-	
 	
 }

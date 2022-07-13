@@ -48,12 +48,6 @@ public class Account {
 		this.accountBalance = accountBalance;
 	}
 
-	@Override
-	public String toString() {
-		return "Account [accountid=" + accountid + ", accountNo=" + accountNo + ", accountBalance=" + accountBalance
-				+ "]";
-	}
-
 
 	
 }
