@@ -17,7 +17,7 @@ public class Bill {
 	@Column(name="Customer_Name")
 	private String customerName;
 	
-	private Furniture furniture;
+	//private Furniture furniture;
 	
 	@Column(name="Quantity")
 	private int quanity;
@@ -31,6 +31,20 @@ public class Bill {
 	@OneToOne
 	private Order order;
 	
+	public Bill() {
+		super();
+	}
+	
+	public Bill(long billNo, String customerName, int quanity, double price, double amount, Order order) {
+		super();
+		this.billNo = billNo;
+		this.customerName = customerName;
+		this.quanity = quanity;
+		this.price = price;
+		this.amount = amount;
+		this.order = order;
+	}
+
 	public long getBillNo() {
 		return billNo;
 	}
@@ -43,12 +57,12 @@ public class Bill {
 	public void setCustomerName(String customerName) {
 		this.customerName = customerName;
 	}
-	public Furniture getFurniture() {
-		return furniture;
-	}
-	public void setFurniture(Furniture furniture) {
-		this.furniture = furniture;
-	}
+//	public Furniture getFurniture() {
+//		return furniture;
+//	}
+//	public void setFurniture(Furniture furniture) {
+//		this.furniture = furniture;
+//	}
 	public int getQuanity() {
 		return quanity;
 	}

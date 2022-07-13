@@ -1,11 +1,9 @@
 package com.cg.OFS.model;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
-@Entity
-@Table(name="user_tbl")
+import javax.persistence.MappedSuperclass;
+@MappedSuperclass
 public class User {
 	@Id
 	@Column(name="user_id")

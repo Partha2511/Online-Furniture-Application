@@ -1,9 +1,14 @@
 package com.cg.OFS.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 @Entity
-@Table(name="Account_tbl")
+@Table(name="acnt_tbl")
 public class Account {
 	
 	@Id
@@ -21,11 +26,25 @@ public class Account {
 		super();
 	}
 
-	public Account(int accountid, String accountNo, String accountBalance) {
+	
+
+	public Account(int accountid, String accountNo, String accountBalance, Customer customer, Card card) {
 		super();
 		this.accountid = accountid;
 		this.accountNo = accountNo;
 		this.accountBalance = accountBalance;
+		this.customer = customer;
+		this.card = card;
+	}
+
+
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
 	}
 
 	public int getAccountid() {
@@ -50,6 +69,18 @@ public class Account {
 
 	public void setAccountBalance(String accountBalance) {
 		this.accountBalance = accountBalance;
+	}
+
+
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 

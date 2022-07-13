@@ -22,11 +22,10 @@ public class Order {
 	@Column(name = "OrderDate")
 	private Date orderDate;
 	
-	@Column(name = "Furniture")
-	private Furniture furniture;
+//	@Column(name = "Furniture")
+//	private Furniture furniture;
 	
 	@ManyToOne
-	@Column(name = "Customer")
 	private Customer customer;
 	
 	@Column(name = "Quanity")
@@ -50,12 +49,12 @@ public class Order {
 	}
 	
 
-	public Order(String orderId, Date orderDate, Furniture furniture, Customer customer, int quanity, double price,
+	public Order(String orderId, Date orderDate, Customer customer, int quanity, double price,
 			double amount, String status) {
 		super();
 		this.orderId = orderId;
 		this.orderDate = orderDate;
-		this.furniture = furniture;
+		//this.furniture = furniture;
 		this.customer = customer;
 		this.quanity = quanity;
 		this.price = price;
@@ -84,14 +83,14 @@ public class Order {
 	}
 
 
-	public Furniture getFurniture() {
-		return furniture;
-	}
-
-
-	public void setFurniture(Furniture furniture) {
-		this.furniture = furniture;
-	}
+//	public Furniture getFurniture() {
+//		return furniture;
+//	}
+//
+//
+//	public void setFurniture(Furniture furniture) {
+//		this.furniture = furniture;
+//	}
 
 
 	public Customer getCustomer() {

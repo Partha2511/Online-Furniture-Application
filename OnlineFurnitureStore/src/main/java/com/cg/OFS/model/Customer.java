@@ -11,7 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="Customer_tbl")
+@Table(name="customer_tbl")
 public class Customer extends User{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
@@ -24,6 +24,8 @@ public class Customer extends User{
 	private String email;
 	@OneToOne
 	private Cart cart;
+	@OneToMany(mappedBy="customer")
+	private List<Order> orders = new ArrayList<Order>();
 	
 	public Customer() {
 		super();
