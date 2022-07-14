@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.cg.OFS.dao.ICartRepository;
 import com.cg.OFS.model.Cart;
+import com.cg.OFS.model.Furniture;
 
 
 @Service
@@ -40,17 +41,17 @@ public class ICartServiceImpl implements ICartService{
 			repo.deleteById(cart.getCartId());
 			
 		}
-		return cart;
-		
-		
-	}
+		return null;
+		}
+	
 	public Cart deleteCartById(int cartId)  {
 		if(repo.existsById(cartId)) {
-			Cart c=(Cart) repo.findById(cartId).get();
+			Cart c=repo.findById(cartId).get();
 			repo.deleteById(cartId);
 			return c;
 		}
 		return null;
+		
 		
 		
 	}
