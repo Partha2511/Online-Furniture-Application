@@ -1,11 +1,15 @@
 package com.cg.OFS.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -25,8 +29,11 @@ public class Order {
 //	@Column(name = "Furniture")
 //	private Furniture furniture;
 	
-	@ManyToOne
-	private Customer customer;
+	@ManyToMany
+	@JoinTable(name="cust_order"
+	,joinColumns= {@JoinColumn(name="cust_id")}
+	,inverseJoinColumns= {@JoinColumn(name="order_id")})
+	private List<Customer> customers= new ArrayList<Customer>();
 	
 	@Column(name = "Quanity")
 	private int quanity;
@@ -49,13 +56,13 @@ public class Order {
 	}
 	
 
-	public Order(String orderId, Date orderDate, Customer customer, int quanity, double price,
+	public Order(String orderId, Date orderDate, int quanity, double price,
 			double amount, String status) {
 		super();
 		this.orderId = orderId;
 		this.orderDate = orderDate;
 		//this.furniture = furniture;
-		this.customer = customer;
+//		this.customer = customer;
 		this.quanity = quanity;
 		this.price = price;
 		this.amount = amount;
@@ -93,14 +100,14 @@ public class Order {
 //	}
 
 
-	public Customer getCustomer() {
-		return customer;
-	}
-
-
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
+//	public Customer getCustomer() {
+//		return customer;
+//	}
+//
+//
+//	public void setCustomer(Customer customer) {
+//		this.customer = customer;
+//	}
 
 
 	public int getQuanity() {

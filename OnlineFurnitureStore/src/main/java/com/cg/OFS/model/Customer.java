@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -18,13 +19,13 @@ public class Customer extends User{
 	private List<Address> addresses=new ArrayList<Address>();
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Account> accounts=new ArrayList<Account>();
-	@Column(name="Mobile No", length=30)
+	@Column(name="Mobile_No", length=30)
 	private String mobileNo;
 	@Column(name="Email", length=30)
 	private String email;
 	@OneToOne
 	private Cart cart;
-	@OneToMany(mappedBy="customer")
+	@ManyToMany(mappedBy="customers")
 	private List<Order> orders = new ArrayList<Order>();
 	
 	public Customer() {

@@ -13,9 +13,9 @@ public class Account {
 	
 	@Id
 	private int accountid;
-	@Column(name="Account Number", length=30)
+	@Column(name="Account_Number", length=30)
 	private String accountNo;
-	@Column(name="Account Balance", length=30)
+	@Column(name="Account_Balance", length=30)
 	private String accountBalance;
 	@ManyToOne
 	private Customer customer;
