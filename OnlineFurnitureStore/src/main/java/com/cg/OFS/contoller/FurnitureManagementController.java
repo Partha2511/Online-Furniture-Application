@@ -15,14 +15,7 @@ import com.cg.OFS.service.FurnitureManagementImpl;
 
 @RestController
 public class FurnitureManagementController {
-//	public List<Furniture> getAllFurnitures();
-//	public Furniture getFurnitureById(int furnitureId);
-//	public Furniture registerFurniture(Furniture furniture);
-//	public Furniture updateFurniture(Furniture furniture);
-//	public Furniture updateFurnitureById(int furnitureId,Furniture furniture);
-//	public String deleteFurniture(Furniture furniture);
-//	public String deleteFurnitureById(int furnitureId);
-	
+
 	@Autowired
 	public FurnitureManagementImpl fimpl;
 	
@@ -66,7 +59,21 @@ public class FurnitureManagementController {
 		return new ResponseEntity<Furniture>(updatedFurniture, HttpStatus.OK);
 	}
 	
-	public String deleteFurniture(Furniture furniture)
+	public ResponseEntity<String> deleteFurniture(Furniture furniture) throws Exception{
+		String result=fimpl.deleteFurniture(furniture);
+		if(result==null){
+			throw new Exception("Furniture not exist in store");
+		}
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
+	
+	public ResponseEntity<String> deleteFurnitureById(int furnitureId) throws Exception{
+		String result=fimpl.deleteFurnitureById(furnitureId);
+		if(result==null){
+			throw new Exception("Furniture not exist in store");
+		}
+		return new ResponseEntity<String>(result,HttpStatus.OK);
+	}
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception e){
