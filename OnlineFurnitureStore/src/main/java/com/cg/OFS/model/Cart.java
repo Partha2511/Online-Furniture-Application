@@ -19,7 +19,7 @@ public class Cart {
 	@Id
 	@Column(name = "CartId")
 	private int cartId;
-	@Column(name = "CartName")
+	@Column(name = "OrderId")
 	private String orderId;
 	
 	@OneToOne
