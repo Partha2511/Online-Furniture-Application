@@ -5,8 +5,8 @@ import java.util.List;
 import com.cg.OFS.model.Order;
 
 public interface IOrderService {
-	List<Order>getAllOrders();
-	Order getOrderByStatus(String status);
-	Order updateOrder(Order order);
-//	Order updateOrderById(String orderId);
+	public List<Order>getAllOrders();
+	public Order getOrderByStatus(String status);
+	public Order updateOrder(Order order);
+//	public Order updateOrderById(String orderId);
 }
