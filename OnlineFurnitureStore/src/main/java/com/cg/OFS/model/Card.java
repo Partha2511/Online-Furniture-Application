@@ -17,18 +17,31 @@ public class Card {
 	
 	@Column(name="Card_Name")
 	private String cardName;
+
 	public int getCardNo() {
 		return cardNo;
 	}
+
 	public void setCardNo(int cardNo) {
 		this.cardNo = cardNo;
 	}
+
+	public Account getAccount() {
+		return account;
+	}
+
+	public void setAccount(Account account) {
+		this.account = account;
+	}
+
 	public String getCardName() {
 		return cardName;
 	}
+
 	public void setCardName(String cardName) {
 		this.cardName = cardName;
 	}
+	
 	
 	
 	

@@ -7,6 +7,6 @@ public interface IPaymentService {
 	
 	Bill getBillById(long billNo);
 	double payByCash(double amount);
-	Card payByCard(Card card);
+	Card payByCard(Card card,double amount);
 
 }

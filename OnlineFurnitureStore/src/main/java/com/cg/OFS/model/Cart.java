@@ -47,6 +47,22 @@ public class Cart {
 		this.quantity = quantity;
 	}
 
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public List<Furniture> getFurnitures() {
+		return furnitures;
+	}
+
+	public void setFurnitures(List<Furniture> furnitures) {
+		this.furnitures = furnitures;
+	}
+
 	public int getCartId() {
 		return cartId;
 	}

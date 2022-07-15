@@ -1,12 +1,20 @@
 package com.cg.OFS.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.cg.OFS.dao.ICardRepository;
 import com.cg.OFS.dao.IPaymentRepository;
 import com.cg.OFS.model.Bill;
 import com.cg.OFS.model.Card;
 
 public class PaymentServiceImpl implements IPaymentService{
 	
+	@Autowired
 	IPaymentRepository paymentRepo;
+	
+	@Autowired
+	ICardRepository crepo;
+	
 
 	@Override
 	public Bill getBillById(long billNo) {
@@ -21,13 +29,29 @@ public class PaymentServiceImpl implements IPaymentService{
 	@Override
 	public double payByCash(double amount) {
 		// TODO Auto-generated method stub
+		System.out.println("Order amount ="+amount+" placed  successfully");
 		return 0;
 	}
 
 	@Override
-	public Card payByCard(Card card) {
+	public Card payByCard(Card card, double amount)  {
 		// TODO Auto-generated method stub
+		if(crepo.existsById(card.getCardNo())) {
+			int parseInt = Integer.parseInt(card.getAccount().getAccountBalance());
+			if(parseInt>=amount) {
+				
+				card.getAccount().setAccountBalance(String.valueOf(parseInt-amount));
+				crepo.save(card);
+				return card;
+			}
+			
+			
+		}
+		
 		return null;
+		
+		
+		
 	}
 
 }
