@@ -1,7 +1,6 @@
 package com.cg.OFS.dao;
 
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
@@ -11,6 +10,8 @@ public interface ICartRepository extends JpaRepository<Cart, Integer>{
 	
 	
 	public Cart getCartByCartId(int cartId);
+
+	
 	
 	
 
