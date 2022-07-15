@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import com.cg.OFS.model.Bill;
 import com.cg.OFS.model.Cart;
@@ -48,6 +49,11 @@ public class ReportController {
 			throw new Exception("Sorry! Orders are not available");
 		}
 		return new ResponseEntity<List<Order>>(rimpl.getAllOrders(),HttpStatus.OK);
+	}
+	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<String> handleException(Exception e){
+		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
 	}
 	
 }
