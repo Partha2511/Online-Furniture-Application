@@ -11,8 +11,8 @@ public interface ICustomerShoppingService {
 	public List<Furniture> getAllFurnitures();
 	public Furniture getFurnitureByName(String furnitureName);
 
-	//Cart addtoCart(Furniture furniture);
+	public Cart addtoCart(Furniture furniture,int cartId);
 	
-	//Order placeOrder(Order order);
+	public Order placeOrder(Order order,int customerId);
 
 }

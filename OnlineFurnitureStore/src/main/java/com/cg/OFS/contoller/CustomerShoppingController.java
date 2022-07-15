@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.OFS.model.Cart;
 import com.cg.OFS.model.Furniture;
+import com.cg.OFS.model.Order;
 import com.cg.OFS.service.CustomerShoppingServiceImpl;
 
 @RestController
@@ -36,9 +38,23 @@ public class CustomerShoppingController {
 	}
 	
 
-	//Cart addtoCart(Furniture furniture);
+	public ResponseEntity<Cart> addtoCart(Furniture furniture,int cartId) throws Exception{
+		Cart cart= cserv.addtoCart(furniture,cartId);
+		if(cart==null) {
+			throw new Exception("Cart doest exists");
+		}
+		return new ResponseEntity<Cart>(cart,HttpStatus.OK);
+	}
 	
-	//Order placeOrder(Order order);
+	public ResponseEntity<Order> placeOrder(Order order,int customertId) throws Exception{
+		Order ord= cserv.placeOrder(order,customertId);
+		if(ord==null) {
+			throw new Exception("order  doest not  exists");
+		}
+		return new ResponseEntity<Order>(ord,HttpStatus.OK);
+	}
+	
+	
 
 
 	
