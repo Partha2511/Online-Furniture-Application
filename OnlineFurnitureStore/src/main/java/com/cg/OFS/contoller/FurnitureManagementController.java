@@ -35,7 +35,7 @@ public class FurnitureManagementController {
 	}
 	
 	@GetMapping("/furnitures/{id}")
-	public ResponseEntity<Furniture> getFurnitureById(@PathVariable("id") int furnitureId) throws Exception{
+	public ResponseEntity<Furniture> getFurnitureById(@PathVariable("id") long furnitureId) throws Exception{
 		Furniture furniture=fimpl.getFurnitureById(furnitureId);
 		if(furniture==null){
 			throw new Exception("Furniture doesn't exist");
@@ -62,7 +62,7 @@ public class FurnitureManagementController {
 	}
 	
 	@PutMapping("/furnitures/{id}")
-	public ResponseEntity<Furniture> updateFurnitureById(@PathVariable("id") int furnitureId,@RequestBody Furniture furniture) throws Exception{
+	public ResponseEntity<Furniture> updateFurnitureById(@PathVariable("id") long furnitureId,@RequestBody Furniture furniture) throws Exception{
 		Furniture updatedFurniture=fimpl.updateFurnitureById(furnitureId, furniture);
 		if(updatedFurniture==null){
 			throw new Exception("Furniture not found"); 
@@ -80,7 +80,7 @@ public class FurnitureManagementController {
 	}
 	
 	@DeleteMapping("/furnitures/{id}")
-	public ResponseEntity<String> deleteFurnitureById(@PathVariable("id") int furnitureId) throws Exception{
+	public ResponseEntity<String> deleteFurnitureById(@PathVariable("id") long furnitureId) throws Exception{
 		String result=fimpl.deleteFurnitureById(furnitureId);
 		if(result==null){
 			throw new Exception("Furniture not exist in store");

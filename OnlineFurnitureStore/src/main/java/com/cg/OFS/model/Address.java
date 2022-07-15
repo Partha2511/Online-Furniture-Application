@@ -5,7 +5,9 @@ import javax.persistence.*;
 @Entity
 @Table(name="Address_tbl")
 public class Address {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int Aid;
 	@Column(name="City", length=30)
 	private String city;
@@ -24,7 +26,7 @@ public class Address {
 
 	public Address(int aid, String city, String state, String country, String pincode) {
 		super();
-		Aid = aid;
+		this.Aid = aid;
 		this.city = city;
 		this.state = state;
 		this.country = country;

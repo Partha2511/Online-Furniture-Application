@@ -1,11 +1,14 @@
 package com.cg.OFS.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -13,41 +16,43 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 
 @Entity
 @Table(name = "order_tbl")
 
 public class Order {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "Id")
-	private String orderId;
+	private Integer orderId;
 	
 	@Column(name = "OrderDate")
-	private Date orderDate;
+	private LocalDate orderDate;
 	
 //	@Column(name = "Furniture")
 //	private Furniture furniture;
-	
-	@ManyToMany
+	@JsonIgnore
+	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="cust_order"
-	,joinColumns= {@JoinColumn(name="cust_id")}
-	,inverseJoinColumns= {@JoinColumn(name="order_id")})
+	,joinColumns= {@JoinColumn(name="order_id")}
+	,inverseJoinColumns= {@JoinColumn(name="cust_id")})
 	private List<Customer> customers= new ArrayList<Customer>();
 	
-	@Column(name = "Quanity")
-	private int quanity;
+	@Column(name = "Quantity")
+	private int quantity;
 	
 	@Column(name = "Price")
 	private double price;
 	
-	@Column(name = "Amount")
-	private double amount;
 	
 	@Column(name = "Status")
 	private String status;
 	
-	@OneToOne
+	@OneToOne(cascade = CascadeType.ALL)
 	private Bill bill;
 
 	
@@ -56,36 +61,36 @@ public class Order {
 	}
 	
 
-	public Order(String orderId, Date orderDate, int quanity, double price,
-			double amount, String status) {
+	public Order(Integer orderId, LocalDate orderDate, int quantity, double price
+			, String status) {
 		super();
 		this.orderId = orderId;
 		this.orderDate = orderDate;
 		//this.furniture = furniture;
 //		this.customer = customer;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.price = price;
-		this.amount = amount;
+		
 		this.status = status;
 	}
 
 
-	public String getOrderId() {
+	public Integer getOrderId() {
 		return orderId;
 	}
 
 
-	public void setOrderId(String orderId) {
+	public void setOrderId(Integer orderId) {
 		this.orderId = orderId;
 	}
 
 
-	public Date getOrderDate() {
+	public LocalDate getOrderDate() {
 		return orderDate;
 	}
 
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(LocalDate orderDate) {
 		this.orderDate = orderDate;
 	}
 
@@ -100,23 +105,36 @@ public class Order {
 //	}
 
 
-//	public Customer getCustomer() {
-//		return customer;
-//	}
-//
-//
-//	public void setCustomer(Customer customer) {
-//		this.customer = customer;
-//	}
 
 
-	public int getQuanity() {
-		return quanity;
+
+	public int getQuantity() {
+		return quantity;
 	}
 
 
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public List<Customer> getCustomers() {
+		return customers;
+	}
+
+
+	public void setCustomers(List<Customer> customers) {
+		this.customers = customers;
+	}
+
+
+	public Bill getBill() {
+		return bill;
+	}
+
+
+	public void setBill(Bill bill) {
+		this.bill = bill;
+	}
+
+
+	public void setQuantity(int quanity) {
+		this.quantity = quanity;
 	}
 
 
@@ -130,14 +148,14 @@ public class Order {
 	}
 
 
-	public double getAmount() {
-		return amount;
-	}
-
-
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+//	public double getAmount() {
+//		return amount;
+//	}
+//
+//
+//	public void setAmount(double amount) {
+//		this.amount = amount;
+//	}
 
 
 	public String getStatus() {

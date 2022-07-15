@@ -6,10 +6,14 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
  
 
@@ -18,8 +22,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "furniture_tbl")
 public class Furniture {
-    @Id
-    @Column(name = "FurnitureId")
+    
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	@Column(name = "FurnitureId")
     private long furnitureId;
     @Column(name = "FurnitureName")
     private String furnitureName;
@@ -33,7 +39,7 @@ public class Furniture {
 	
 	@OneToMany(mappedBy="furniture",cascade=CascadeType.ALL)
 	private List<Review> feedBacks = new ArrayList<Review>();
-	
+	@JsonIgnore
 	@ManyToMany(mappedBy="furnitures",cascade=CascadeType.ALL)
 	private List<Cart> carts=new ArrayList<Cart>();
 	
@@ -78,6 +84,18 @@ public class Furniture {
 	}
 	public void setPrice(double price) {
 		this.price = price;
+	}
+	public List<Review> getFeedBacks() {
+		return feedBacks;
+	}
+	public void setFeedBacks(List<Review> feedBacks) {
+		this.feedBacks = feedBacks;
+	}
+	public List<Cart> getCarts() {
+		return carts;
+	}
+	public void setCarts(List<Cart> carts) {
+		this.carts = carts;
 	}
 
     

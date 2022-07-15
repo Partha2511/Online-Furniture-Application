@@ -3,9 +3,10 @@ package com.cg.OFS.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -13,21 +14,25 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "cart_tbl")
 public class Cart {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "CartId")
 	private int cartId;
-	@Column(name = "OrderId")
-	private String orderId;
-	
-	@OneToOne
+//	@Column(name = "OrderId")
+//	private String orderId;
+	@JsonIgnore
+	@OneToOne(mappedBy= "cart")
     private Customer customer;
 	
 
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany
 	@JoinTable(name="cart_furniture"
 	,joinColumns= {@JoinColumn(name="card_id")}
 	,inverseJoinColumns= {@JoinColumn(name="furniture_id")})
@@ -40,10 +45,10 @@ public class Cart {
 		
 	}
 
-	public Cart(int cartId, String orderId, int quantity) {
+	public Cart(int cartId, int quantity) {
 		super();
 		this.cartId = cartId;
-		this.orderId = orderId;
+		//this.orderId = orderId;
 		this.quantity = quantity;
 	}
 
@@ -71,13 +76,13 @@ public class Cart {
 		this.cartId = cartId;
 	}
 
-	public String getOrderId() {
-		return orderId;
-	}
-
-	public void setOrderId(String orderId) {
-		this.orderId = orderId;
-	}
+//	public String getOrderId() {
+//		return orderId;
+//	}
+//
+//	public void setOrderId(String orderId) {
+//		this.orderId = orderId;
+//	}
 
 	public int getQuantity() {
 		return quantity;

@@ -2,15 +2,20 @@ package com.cg.OFS.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name="Bill_tbl")
 public class Bill {
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="BillNo")
 	private long billNo;
 	
@@ -20,14 +25,13 @@ public class Bill {
 	//private Furniture furniture;
 	
 	@Column(name="Quantity")
-	private int quanity;
+	private int quantity;
 	
 	@Column(name="Price")
     private double price;
 	
-	@Column(name="Amount")
-    private double amount;
 	
+	@JsonIgnore
 	@OneToOne
 	private Order order;
 	
@@ -35,13 +39,13 @@ public class Bill {
 		super();
 	}
 	
-	public Bill(long billNo, String customerName, int quanity, double price, double amount, Order order) {
+	public Bill(long billNo, String customerName, int quantity, double price, Order order) {
 		super();
 		this.billNo = billNo;
 		this.customerName = customerName;
-		this.quanity = quanity;
+		this.quantity = quantity;
 		this.price = price;
-		this.amount = amount;
+		
 		this.order = order;
 	}
 
@@ -63,11 +67,11 @@ public class Bill {
 //	public void setFurniture(Furniture furniture) {
 //		this.furniture = furniture;
 //	}
-	public int getQuanity() {
-		return quanity;
+	public int getQuantity() {
+		return quantity;
 	}
-	public void setQuanity(int quanity) {
-		this.quanity = quanity;
+	public void setQuantity(int quanity) {
+		this.quantity = quanity;
 	}
 	public double getPrice() {
 		return price;
@@ -75,12 +79,7 @@ public class Bill {
 	public void setPrice(double price) {
 		this.price = price;
 	}
-	public double getAmount() {
-		return amount;
-	}
-	public void setAmount(double amount) {
-		this.amount = amount;
-	}
+	
     
     
     

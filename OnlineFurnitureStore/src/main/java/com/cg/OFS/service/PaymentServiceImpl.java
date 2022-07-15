@@ -1,12 +1,14 @@
 package com.cg.OFS.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.OFS.dao.ICardRepository;
 import com.cg.OFS.dao.IPaymentRepository;
 import com.cg.OFS.model.Bill;
 import com.cg.OFS.model.Card;
 
+@Service
 public class PaymentServiceImpl implements IPaymentService{
 	
 	@Autowired
@@ -30,7 +32,7 @@ public class PaymentServiceImpl implements IPaymentService{
 	public double payByCash(double amount) {
 		// TODO Auto-generated method stub
 		System.out.println("Order amount ="+amount+" placed  successfully");
-		return 0;
+		return amount;
 	}
 
 	@Override

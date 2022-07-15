@@ -15,19 +15,24 @@ import javax.persistence.Table;
 @Table(name="customer_tbl")
 public class Customer extends User{
 	
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Address> addresses=new ArrayList<Address>();
+	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Account> accounts=new ArrayList<Account>();
 	@Column(name="Mobile_No", length=30)
 	private String mobileNo;
 	@Column(name="Email", length=30)
 	private String email;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Cart cart;
-	@ManyToMany(mappedBy="customers")
+	
+	@ManyToMany(mappedBy="customers", cascade = CascadeType.ALL)
 	private List<Order> orders = new ArrayList<Order>();
 	
+	@OneToMany(mappedBy = "customer")
+	public List<Review> listReviews = new ArrayList<Review>();
 	
 	
 	public List<Address> getAddresses() {
@@ -66,10 +71,18 @@ public class Customer extends User{
 		super();
 	}
 
-	public Customer(int uid, String username, String password, String role,String mobileNo, String email, Review review) {
-		super(uid,username,password,role);
-		this.mobileNo = mobileNo;
-		this.email = email;
+//	public Customer(int uid, String username, String password, String role,String mobileNo, String email) {
+//		super(uid,username,password,role);
+//		this.mobileNo = mobileNo;
+//		this.email = email;
+//	}
+
+	public List<Review> getListReviews() {
+		return listReviews;
+	}
+
+	public void setListReviews(List<Review> listReviews) {
+		this.listReviews = listReviews;
 	}
 
 	public String getMobileNo() {

@@ -22,8 +22,8 @@ public class OrderServiceImpl implements IOrderService{
 	}
 
 	@Override
-	public Order getOrderByStatus(String status) {
-		return null;
+	public List<Order> getOrderByStatus(String status) {
+		return repo.getOrderByStatus(status);
 		
 	
 	}
@@ -31,18 +31,28 @@ public class OrderServiceImpl implements IOrderService{
 	@Override
 	public Order updateOrder(Order order) {
 		if(repo.existsById(order.getOrderId())) {
-			repo.save(order);
+			Order o = repo.findById(order.getOrderId()).get();
+			order.setCustomers(o.getCustomers());
+			
+			
+			return repo.save(order);
+			
 		}
-		return order;
+		return null;
 	}
 
-//	@Override
-//	public Order updateOrderById(String orderId) {
-//		if(repo.existsById(orderId)) {
-//			repo.save(order);
-//		}
-//		return order;
-//	}
+	@Override
+	public Order updateOrderById(int orderId,Order order) {
+		if(repo.existsById(orderId)) {
+			Order o = repo.findById(orderId).get();
+			order.setCustomers(o.getCustomers());
+			
+			
+			return repo.save(order);
+			
+		}
+		return null;
+	}
 	
 
 }

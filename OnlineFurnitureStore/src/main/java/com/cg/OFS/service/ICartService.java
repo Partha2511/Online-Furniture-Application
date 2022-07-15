@@ -12,7 +12,7 @@ public interface ICartService {
 	public List<Cart> getAllCarts();
 	public Cart getCartByCartId(int cartId);
 	public Cart updateCart(Cart cart);
-	public Cart updateCartById(int cartId);
+	public Cart updateCartById(int cartId, Cart cart);
 	public Cart deleteCart(Cart cart);
 	public Cart deleteCartById(int cartId);
 	

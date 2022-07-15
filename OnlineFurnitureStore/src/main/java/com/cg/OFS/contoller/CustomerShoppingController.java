@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.OFS.model.Cart;
@@ -37,8 +39,8 @@ public class CustomerShoppingController {
 		return new ResponseEntity<Furniture>(furniture,HttpStatus.OK);
 	}
 	
-
-	public ResponseEntity<Cart> addtoCart(Furniture furniture,int cartId) throws Exception{
+	@PutMapping("/addToCart/{cartId}")
+	public ResponseEntity<Cart> addtoCart(@RequestBody Furniture furniture,@PathVariable("cartId")int cartId) throws Exception{
 		Cart cart= cserv.addtoCart(furniture,cartId);
 		if(cart==null) {
 			throw new Exception("Cart doest exists");
@@ -46,7 +48,8 @@ public class CustomerShoppingController {
 		return new ResponseEntity<Cart>(cart,HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Order> placeOrder(Order order,int customertId) throws Exception{
+	@PutMapping("/placeOrder/{customerId}")
+	public ResponseEntity<Order> placeOrder(@RequestBody Order order,@PathVariable("customerId")int customertId) throws Exception{
 		Order ord= cserv.placeOrder(order,customertId);
 		if(ord==null) {
 			throw new Exception("order  doest not  exists");

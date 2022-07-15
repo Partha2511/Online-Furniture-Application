@@ -13,21 +13,27 @@ public class OrderCancellationServiceImpl implements IOrderCancellationService{
 	private IOrderServiceRepository repo;
 
 	@Override
-	public String deleteOrder(Order order) {
-		Order delOrder = repo.findById((String)order.getOrderId()).get();
+	public Integer deleteOrder(Order order) {
+		Order delOrder = repo.findById(order.getOrderId()).get();
 		if(delOrder==null) {
 			return null;
 		}
+		delOrder.setCustomers(null);
+		repo.save(delOrder);
 		repo.delete(order);
 		return delOrder.getOrderId();
 	}
 
 	@Override
-	public String deleteOrderById(String orderId) {
+	public Integer deleteOrderById(Integer orderId) {
 		Order delOrder = repo.findById(orderId).get();
+		
 		if(delOrder==null) {
+			
 			return null;
 		}
+		delOrder.setCustomers(null);
+		repo.save(delOrder);
 		repo.deleteById(orderId);
 		return delOrder.getOrderId();
 	}

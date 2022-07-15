@@ -6,6 +6,6 @@ import com.cg.OFS.model.Review;
 
 public interface ICustomerFeedbackService {
 	public List<Review> getAllReviews();
-	public int getReviewByreviewRating(int reviewRating);
+	public List<Review> getReviewByreviewRating(int reviewRating);
 
 }

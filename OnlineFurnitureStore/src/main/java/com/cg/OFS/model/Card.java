@@ -2,6 +2,8 @@ package com.cg.OFS.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -9,7 +11,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="Card_tbl")
 public class Card {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Card_No")
 	private int cardNo;
 	@OneToOne

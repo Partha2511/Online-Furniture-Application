@@ -8,8 +8,8 @@ import com.cg.OFS.model.Furniture;
 @Repository
 public interface IFurnitureRepository extends JpaRepository<Furniture, Integer> {
 
-	public Furniture getFurnitureByFurnitureId(int furnitureId);
+	public Furniture getFurnitureByFurnitureId(long furnitureId);
 	
 	
-	public String deleteFurnitureByFurnitureId(int furnitureId);
+	public String deleteFurnitureByFurnitureId(long furnitureId);
 }

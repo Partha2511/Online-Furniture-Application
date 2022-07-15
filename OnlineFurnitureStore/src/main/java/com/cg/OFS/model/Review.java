@@ -3,22 +3,31 @@ package com.cg.OFS.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 @Table(name="review_tbl")
 public class Review {
+	
 	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="review_id")
 	private int reviewId;
 	@Column(name="description")
 	private String description;
 	@Column(name="review_rating")
 	private int reviewRating;
-	
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Furniture furniture;
+	@JsonIgnore
+	@ManyToOne
+	private Customer customer;
 	
 	public Review() {
 		// TODO Auto-generated constructor stub
@@ -52,6 +61,22 @@ public class Review {
 
 	public void setReviewRating(int reviewRating) {
 		this.reviewRating = reviewRating;
+	}
+
+	public Furniture getFurniture() {
+		return furniture;
+	}
+
+	public void setFurniture(Furniture furniture) {
+		this.furniture = furniture;
+	}
+
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 	
 }

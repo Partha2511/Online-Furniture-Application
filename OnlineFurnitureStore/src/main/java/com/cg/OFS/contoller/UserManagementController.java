@@ -32,7 +32,7 @@ public class UserManagementController {
 	}
 	
 	@PostMapping("/Customer/new")
-	public ResponseEntity<Customer> registerNewUser(Customer Customer) throws Exception{
+	public ResponseEntity<Customer> registerNewUser(@RequestBody Customer Customer) throws Exception{
 		Customer savedUser=uImpl.registerNewUser(Customer);
 		if(savedUser==null){
 			throw new Exception("Customer Cannot be Added!");
@@ -50,7 +50,7 @@ public class UserManagementController {
 	}
 	
 	@DeleteMapping("/Customer/deleteUser")
-	public ResponseEntity<String> deleteUser(Customer Customer) throws Exception{
+	public ResponseEntity<String> deleteUser(@RequestBody Customer Customer) throws Exception{
 		String result=uImpl.deleteUser(Customer);
 		if(result==null){
 			throw new Exception("Customer doesn't exist!!");

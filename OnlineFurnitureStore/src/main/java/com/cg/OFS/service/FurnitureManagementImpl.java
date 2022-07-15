@@ -2,6 +2,8 @@ package com.cg.OFS.service;
 
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,11 +22,12 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	}
 
 	@Override
-	public Furniture getFurnitureById(int furnitureId) {
-		if(fms.findById(furnitureId).get()==null){
+	public Furniture getFurnitureById(long furnitureId) {
+		Furniture f = fms.getFurnitureByFurnitureId(furnitureId);
+		if(f==null){
 			return null;
 		}
-		return fms.findById(furnitureId).get();
+		return f;
 	}
 
 	@Override
@@ -34,14 +37,14 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 
 	@Override
 	public Furniture updateFurniture(Furniture furniture) {
-		if(fms.findById((int) furniture.getFurnitureId()).get()!=null){
+		if(getFurnitureById(furniture.getFurnitureId())!=null){
 			return fms.save(furniture);
 		}
 		return null;
 	}
 
 	@Override
-	public Furniture updateFurnitureById(int furnitureId,Furniture furniture) {
+	public Furniture updateFurnitureById(long furnitureId,Furniture furniture) {
 		if(getFurnitureById(furnitureId)==null){
 			return null;
 		}
@@ -50,7 +53,7 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 
 	@Override
 	public String deleteFurniture(Furniture furniture) {
-		Furniture delFurniture=fms.findById((int)furniture.getFurnitureId()).get();
+		Furniture delFurniture=getFurnitureById(furniture.getFurnitureId());
 		if(delFurniture==null){
 			return null;
 		}
@@ -59,12 +62,13 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	}
 
 	@Override
-	public String deleteFurnitureById(int furnitureId) {
-		Furniture delFurniture=fms.findById(furnitureId).get();
+	@Transactional
+	public String deleteFurnitureById(long furnitureId) {
+		Furniture delFurniture=getFurnitureById(furnitureId);
 		if(delFurniture==null){
 			return null;
 		}
-		fms.deleteById(furnitureId);
+		fms.deleteFurnitureByFurnitureId(furnitureId);
 		return delFurniture.getFurnitureName();
 	}
 

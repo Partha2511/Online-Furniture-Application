@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.OFS.model.Order;
@@ -18,21 +19,21 @@ public class OrderCancellationController {
 	public OrderCancellationServiceImpl ocimpl;
 	
 	@DeleteMapping("/Order/deleteOrder")
-	public ResponseEntity<String> deleteOrder(Order order) throws Exception{
-		String result=ocimpl.deleteOrder(order);
+	public ResponseEntity<Integer> deleteOrder(@RequestBody Order order) throws Exception{
+		Integer result=ocimpl.deleteOrder(order);
 		if(result==null){
 			throw new Exception("Order doesnot exist in store");
 		}
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 }
 	
 	@DeleteMapping("/Order/deleteOrderById/{orderId}")
-	public ResponseEntity<String> deleteOrderById(@PathVariable("orderId") String orderId) throws Exception{
-		String result=ocimpl.deleteOrderById(orderId);
+	public ResponseEntity<Integer> deleteOrderById(@PathVariable("orderId") Integer orderId) throws Exception{
+		Integer result=ocimpl.deleteOrderById(orderId);
 		if(result==null){
 			throw new Exception("Order doesnot exist in store");
 		}
-		return new ResponseEntity<String>(result,HttpStatus.OK);
+		return new ResponseEntity<Integer>(result,HttpStatus.OK);
 }
 	
 	@ExceptionHandler(Exception.class)

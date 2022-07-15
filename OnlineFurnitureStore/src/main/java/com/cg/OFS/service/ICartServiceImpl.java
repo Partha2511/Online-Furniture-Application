@@ -1,11 +1,12 @@
 package com.cg.OFS.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.cg.OFS.dao.ICartRepository;
 import com.cg.OFS.model.Cart;
-import com.cg.OFS.model.Furniture;
 
 
 @Service
@@ -18,8 +19,9 @@ public class ICartServiceImpl implements ICartService{
 		return cartlist;
 	}
 	public Cart getCartByCartId(int cartId) {
-		if(repo.getCartByCartId(cartId)!=null )
-		return null;
+		Cart cartByCartId = repo.getCartByCartId(cartId);
+		if(cartByCartId!=null )
+			return cartByCartId;
 		return null;
 
 	}
@@ -31,15 +33,19 @@ public class ICartServiceImpl implements ICartService{
 		return cart;
 		
 	}
-//	@Override
-	public Cart updateCartById(int cartId) {
-		// TODO Auto-generated method stub
+	@Override
+	public Cart updateCartById(int cartId, Cart cart) {
+		if(repo.existsById(cartId)) {
+			return repo.save(cart);
+			
+		}
 		return null;
 	}
 	public Cart deleteCart(Cart cart) {
 		if(repo.existsById(cart.getCartId())) {
+			Cart c=repo.findById(cart.getCartId()).get();
 			repo.deleteById(cart.getCartId());
-			
+			return c;
 		}
 		return null;
 		}
