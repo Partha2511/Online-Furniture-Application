@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import com.cg.OFS.model.Bill;
 import com.cg.OFS.model.Cart;
 import com.cg.OFS.model.Customer;
@@ -19,6 +21,7 @@ public class ReportController {
 	@Autowired
 	public ReportServiceImpl rimpl;
 	
+	@GetMapping("/getAllBills")
 	public ResponseEntity<List<Bill>> getAllBills() throws Exception{
 		List<Bill> bills=rimpl.getAllBills();
 		if(bills.isEmpty()){
@@ -27,6 +30,7 @@ public class ReportController {
 		return new ResponseEntity<List<Bill>>(rimpl.getAllBills(),HttpStatus.OK);
 	}
 	
+	@GetMapping("/getAllCustomers")
 	public ResponseEntity<List<Customer>> getAllCustomers() throws Exception{
 		List<Customer> customers=rimpl.getAllCustomers();
 		if(customers.isEmpty()){
@@ -35,6 +39,7 @@ public class ReportController {
 		return new ResponseEntity<List<Customer>>(rimpl.getAllCustomers(),HttpStatus.OK);
 	}
 	
+	@GetMapping("/getAllCarts")
 	public ResponseEntity<List<Cart>> getAllCarts() throws Exception{
 		List<Cart> carts=rimpl.getAllCarts();
 		if(carts.isEmpty()){
@@ -42,7 +47,8 @@ public class ReportController {
 		}
 		return new ResponseEntity<List<Cart>>(rimpl.getAllCarts(),HttpStatus.OK);
 	}
-
+	
+	@GetMapping("/getAllOrders")
 	public ResponseEntity<List<Order>> getAllOrders() throws Exception{
 		List<Order> orders=rimpl.getAllOrders();
 		if(orders.isEmpty()){
