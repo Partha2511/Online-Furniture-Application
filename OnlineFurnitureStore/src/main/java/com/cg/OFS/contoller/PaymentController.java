@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cg.OFS.model.Bill;
+import com.cg.OFS.model.Card;
 import com.cg.OFS.service.PaymentServiceImpl;
 
 @RestController
@@ -27,9 +28,19 @@ public class PaymentController {
 	
 	
 
-//	double payByCash(double amount);
-//	
-//	Card payByCard(Card card);
+	public ResponseEntity<Double> payByCash(@PathVariable("amount")double amount) {
+		Double d = pserv.payByCash(amount);
+		return new ResponseEntity<Double>(d,HttpStatus.OK);
+	}
+	
+	public ResponseEntity<Card> payByCard(Card card, @PathVariable("amount")double amount)  throws Exception{
+		
+		Card cards = pserv.payByCard(card, amount);
+		if(cards==null) {
+			throw new Exception("This card does not exists.");
+		}
+		return new ResponseEntity<Card>(cards,HttpStatus.OK);
+	}
 
 	
 	
