@@ -2,6 +2,8 @@ package com.cg.OFS.model;
 
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Address_tbl")
 public class Address {
@@ -18,7 +20,7 @@ public class Address {
 	@Column(name="Pincode", length=30)
 	private String pincode;
 	
-
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	

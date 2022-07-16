@@ -3,12 +3,14 @@ package com.cg.OFS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.OFS.dao.IAccountRepository;
 import com.cg.OFS.dao.ICustomerRepository;
 import com.cg.OFS.model.Account;
 import com.cg.OFS.model.Customer;
 
+@Service
 public class AccountServiceImpl implements IAccountService{
 
 	@Autowired
@@ -21,6 +23,8 @@ public class AccountServiceImpl implements IAccountService{
 		if(cRepo.existsById(userId)){
 			Customer c=cRepo.findById(userId).get();
 			c.getAccounts().add(account);
+			account.setCustomer(c);
+			aRepo.save(account);
 			cRepo.save(c);
 			return account;
 		}
@@ -30,9 +34,10 @@ public class AccountServiceImpl implements IAccountService{
 	@Override
 	public Account updateAccount(int userId, Account account) {
 		if(cRepo.existsById(userId)){
-			Customer c=cRepo.findById(userId).get();
+			//Customer c=cRepo.findById(userId).get();
 			if(aRepo.existsById(account.getAccountid())){
-				account.setCustomer(c);
+				Account a = aRepo.findById(account.getAccountid()).get();
+				account.setCustomer(a.getCustomer());
 				aRepo.save(account);
 				return account;
 			}

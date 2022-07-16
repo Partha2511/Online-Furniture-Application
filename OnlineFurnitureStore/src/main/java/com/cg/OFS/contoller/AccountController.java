@@ -6,7 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,7 +28,8 @@ public class AccountController {
 	@Autowired
 	public AccountServiceImpl aimpl;
 	
-	public ResponseEntity<Account> addAccount(int userId, Account account) {
+	@PostMapping("/account/{userId}")
+	public ResponseEntity<Account> addAccount(@PathVariable("userId")int userId,@RequestBody Account account) {
 		Account savedAccount= aimpl.addAccount(userId, account);
 		if(savedAccount!=null){
 			return new ResponseEntity<Account>(savedAccount,HttpStatus.OK);
@@ -30,7 +37,8 @@ public class AccountController {
 		return null;
 	}
 	
-	public ResponseEntity<Account> updateAccount(int userId, Account account) throws AccountNotFound{
+	@PutMapping("/account/{userId}")
+	public ResponseEntity<Account> updateAccount(@PathVariable("userId")int userId,@RequestBody Account account) throws AccountNotFound{
 		Account updatedAccount=aimpl.updateAccount(userId, account);
 		if(updatedAccount!=null){
 			return new ResponseEntity<Account>(updatedAccount,HttpStatus.OK);
@@ -38,7 +46,8 @@ public class AccountController {
 		throw new AccountNotFound("Sorry this account doesn't exist");
 	}
 	
-	public ResponseEntity<Account> deleteAccount(int userId, Account account) throws AccountNotFound{
+	@DeleteMapping("/account/{userId}")
+	public ResponseEntity<Account> deleteAccount(@PathVariable("userId")int userId,@RequestBody Account account) throws AccountNotFound{
 		Account deletedAccount=aimpl.deleteAccount(userId, account);
 		if(deletedAccount!=null){
 			return new ResponseEntity<Account>(deletedAccount,HttpStatus.OK);
@@ -46,7 +55,8 @@ public class AccountController {
 		throw new AccountNotFound("Sorry this account doesn't exist");
 	}
 	
-	public ResponseEntity<List<Account>> getAccounts(int userId) throws AccountNotFound{
+	@GetMapping("/account/{userId}")
+	public ResponseEntity<List<Account>> getAccounts(@PathVariable("userId")int userId) throws AccountNotFound{
 		List<Account> listAccount=aimpl.getAccounts(userId);
 		if(listAccount.size()!=0){
 			return new ResponseEntity<List<Account>>(listAccount,HttpStatus.OK);

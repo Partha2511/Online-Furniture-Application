@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="Card_tbl")
 public class Card {
@@ -16,7 +18,8 @@ public class Card {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="Card_No")
 	private int cardNo;
-	@OneToOne
+	@JsonIgnore
+	@OneToOne(mappedBy="card")
 	private Account account;
 	
 	@Column(name="Card_Name")

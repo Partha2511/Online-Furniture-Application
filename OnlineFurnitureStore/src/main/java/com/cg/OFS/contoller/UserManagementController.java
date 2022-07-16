@@ -28,7 +28,7 @@ public class UserManagementController {
 	@Autowired
 	UserManagementServiceImpl uImpl;
 	
-	public ResponseEntity<Boolean> loginUser(String username,String password) throws Exception{
+	public ResponseEntity<Boolean> loginUser(String username,String password) throws IncorrectValueException{
 		Boolean result = uImpl.loginUser(username, password);
 		if(result) {
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
@@ -38,7 +38,7 @@ public class UserManagementController {
 	}
 	
 	@PostMapping("/Customer/new")
-	public ResponseEntity<Customer> registerNewUser(@RequestBody Customer Customer) throws Exception{
+	public ResponseEntity<Customer> registerNewUser(@RequestBody Customer Customer) throws UserAlreadyExistsException{
 		Customer savedUser=uImpl.registerNewUser(Customer);
 		if(savedUser==null){
 			throw new UserAlreadyExistsException("This User Already Exists with us!");
@@ -47,7 +47,7 @@ public class UserManagementController {
 	}
 	
 	@PutMapping("/Customer/update")
-	public ResponseEntity<Customer> updateUser(@RequestBody Customer Customer) throws Exception{
+	public ResponseEntity<Customer> updateUser(@RequestBody Customer Customer) throws UserDoesNotExistException{
 		Customer updatedUser=uImpl.updateUser(Customer);
 		if(updatedUser==null){
 			throw new UserDoesNotExistException("Customer not Found");
@@ -56,7 +56,7 @@ public class UserManagementController {
 	}
 	
 	@DeleteMapping("/Customer/deleteUser")
-	public ResponseEntity<String> deleteUser(@RequestBody Customer Customer) throws Exception{
+	public ResponseEntity<String> deleteUser(@RequestBody Customer Customer) throws UserDoesNotExistException{
 		String result=uImpl.deleteUser(Customer);
 		if(result==null){
 			throw new UserDoesNotExistException("Customer doesn't exist!!");
@@ -65,7 +65,7 @@ public class UserManagementController {
 	}
 	
 	@DeleteMapping("/Customer/deleteUserById/{uid}")
-	public ResponseEntity<String> deleteUserById(@PathVariable("uid") int uid) throws Exception{
+	public ResponseEntity<String> deleteUserById(@PathVariable("uid") int uid) throws UserDoesNotExistException{
 		String result=uImpl.deleteUserById(uid);
 		if(result==null){
 			throw new UserDoesNotExistException("Customer doesn't exist!!");
@@ -87,27 +87,27 @@ public class UserManagementController {
 	@ExceptionHandler(UserDoesNotExistException.class)
     public ResponseEntity<ExceptionResponse> handleException(UserDoesNotExistException e) {
        ExceptionResponse response=new ExceptionResponse();
-       response.setErrorCode("CONFLICT");
+       response.setErrorCode("NOT_FOUND");
       response.setErrorMessage(e.getMessage());
       response.setTimestamp(LocalDateTime.now());
 
-        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.CONFLICT);
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.NOT_FOUND);
         
     }
 	
 	@ExceptionHandler(IncorrectValueException.class)
     public ResponseEntity<ExceptionResponse> handleException(IncorrectValueException e) {
        ExceptionResponse response=new ExceptionResponse();
-       response.setErrorCode("CONFLICT");
+       response.setErrorCode("BAD_REQUEST");
       response.setErrorMessage(e.getMessage());
       response.setTimestamp(LocalDateTime.now());
 
-        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.CONFLICT);
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.BAD_REQUEST);
         
     }
 	
-	@ExceptionHandler(Exception.class)
-	public ResponseEntity<String> handleException(Exception e){
-		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
-	}
+//	@ExceptionHandler(Exception.class)
+//	public ResponseEntity<String> handleException(Exception e){
+//		return new ResponseEntity<String>(e.getMessage(), HttpStatus.NOT_FOUND);
+//	}
 }

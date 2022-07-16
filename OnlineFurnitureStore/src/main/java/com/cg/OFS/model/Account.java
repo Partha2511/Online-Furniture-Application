@@ -10,6 +10,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name="acnt_tbl")
 public class Account {
@@ -21,6 +23,7 @@ public class Account {
 	private String accountNo;
 	@Column(name="Account_Balance", length=30)
 	private String accountBalance;
+	@JsonIgnore
 	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	@OneToOne(cascade=CascadeType.ALL)

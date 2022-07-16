@@ -3,12 +3,14 @@ package com.cg.OFS.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cg.OFS.dao.IAddressRepository;
 import com.cg.OFS.dao.ICustomerRepository;
 import com.cg.OFS.model.Address;
 import com.cg.OFS.model.Customer;
 
+@Service
 public class AddressServiceImpl implements IAddressService{
 
 	@Autowired
@@ -21,6 +23,8 @@ public class AddressServiceImpl implements IAddressService{
 		if(cRepo.existsById(userId)){
 			Customer c=cRepo.findById(userId).get();
 			c.getAddresses().add(address);
+			address.setCustomer(c);
+			aRepo.save(address);
 			cRepo.save(c);
 			return address;
 		}
