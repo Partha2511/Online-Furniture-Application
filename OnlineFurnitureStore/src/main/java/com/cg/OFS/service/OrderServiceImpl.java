@@ -33,7 +33,7 @@ public class OrderServiceImpl implements IOrderService{
 		if(repo.existsById(order.getOrderId())) {
 			Order o = repo.findById(order.getOrderId()).get();
 			order.setCustomers(o.getCustomers());
-			
+			order.setFurniture(o.getFurniture());
 			
 			return repo.save(order);
 			
@@ -46,7 +46,7 @@ public class OrderServiceImpl implements IOrderService{
 		if(repo.existsById(orderId)) {
 			Order o = repo.findById(orderId).get();
 			order.setCustomers(o.getCustomers());
-			
+			order.setFurniture(o.getFurniture());
 			
 			return repo.save(order);
 			

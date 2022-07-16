@@ -33,8 +33,12 @@ public class Order {
 	@Column(name = "OrderDate")
 	private LocalDate orderDate;
 	
-//	@Column(name = "Furniture")
-//	private Furniture furniture;
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name="order_furniture"
+	,joinColumns= {@JoinColumn(name="order_id")}
+	,inverseJoinColumns= {@JoinColumn(name="furniture_id")})
+	private List<Furniture> furniture=new ArrayList<Furniture>();
+	
 	@JsonIgnore
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="cust_order"
@@ -95,17 +99,20 @@ public class Order {
 	}
 
 
-//	public Furniture getFurniture() {
-//		return furniture;
-//	}
-//
-//
-//	public void setFurniture(Furniture furniture) {
-//		this.furniture = furniture;
-//	}
 
 
 
+
+
+
+	public List<Furniture> getFurniture() {
+		return furniture;
+	}
+
+
+	public void setFurniture(List<Furniture> furniture) {
+		this.furniture = furniture;
+	}
 
 
 	public int getQuantity() {

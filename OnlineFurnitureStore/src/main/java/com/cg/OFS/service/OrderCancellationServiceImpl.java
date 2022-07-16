@@ -19,7 +19,8 @@ public class OrderCancellationServiceImpl implements IOrderCancellationService{
 			return null;
 		}
 		delOrder.setCustomers(null);
-		repo.save(delOrder);
+		delOrder.setFurniture(null);
+		repo.save(delOrder);	
 		repo.delete(order);
 		return delOrder.getOrderId();
 	}
@@ -33,6 +34,7 @@ public class OrderCancellationServiceImpl implements IOrderCancellationService{
 			return null;
 		}
 		delOrder.setCustomers(null);
+		delOrder.setFurniture(null);
 		repo.save(delOrder);
 		repo.deleteById(orderId);
 		return delOrder.getOrderId();
