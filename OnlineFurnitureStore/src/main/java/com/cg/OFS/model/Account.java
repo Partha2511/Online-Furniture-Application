@@ -1,5 +1,6 @@
 package com.cg.OFS.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,9 +21,9 @@ public class Account {
 	private String accountNo;
 	@Column(name="Account_Balance", length=30)
 	private String accountBalance;
-	@ManyToOne
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
-	@OneToOne
+	@OneToOne(cascade=CascadeType.ALL)
 	private Card card;
 	
 	public Account() {

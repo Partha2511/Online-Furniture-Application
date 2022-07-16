@@ -17,7 +17,9 @@ public class Address {
 	private String country;
 	@Column(name="Pincode", length=30)
 	private String pincode;
-	@ManyToOne
+	
+
+	@ManyToOne(cascade=CascadeType.ALL)
 	private Customer customer;
 	
 	public Address() {
@@ -71,6 +73,14 @@ public class Address {
 
 	public void setPincode(String pincode) {
 		this.pincode = pincode;
+	}
+	
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
 	}
 
 }
