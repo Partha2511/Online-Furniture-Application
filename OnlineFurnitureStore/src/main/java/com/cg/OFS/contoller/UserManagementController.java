@@ -1,5 +1,7 @@
 package com.cg.OFS.contoller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cg.OFS.Exception.ExceptionResponse;
+import com.cg.OFS.Exception.IncorrectValueException;
+import com.cg.OFS.Exception.UserAlreadyExistsException;
+import com.cg.OFS.Exception.UserDoesNotExistException;
 import com.cg.OFS.model.Customer;
 import com.cg.OFS.service.UserManagementServiceImpl;
 
@@ -27,7 +33,7 @@ public class UserManagementController {
 		if(result) {
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		}
-		throw new Exception("Incorrect Username and Password !!!");
+		throw new IncorrectValueException("Incorrect Username and Password !!!");
 		
 	}
 	
@@ -35,7 +41,7 @@ public class UserManagementController {
 	public ResponseEntity<Customer> registerNewUser(@RequestBody Customer Customer) throws Exception{
 		Customer savedUser=uImpl.registerNewUser(Customer);
 		if(savedUser==null){
-			throw new Exception("Customer Cannot be Added!");
+			throw new UserAlreadyExistsException("This User Already Exists with us!");
 		}
 		return new ResponseEntity<Customer>(savedUser, HttpStatus.OK);
 	}
@@ -44,7 +50,7 @@ public class UserManagementController {
 	public ResponseEntity<Customer> updateUser(@RequestBody Customer Customer) throws Exception{
 		Customer updatedUser=uImpl.updateUser(Customer);
 		if(updatedUser==null){
-			throw new Exception("Customer not Found");
+			throw new UserDoesNotExistException("Customer not Found");
 		}
 		return new ResponseEntity<Customer>(Customer,HttpStatus.OK);
 	}
@@ -53,7 +59,7 @@ public class UserManagementController {
 	public ResponseEntity<String> deleteUser(@RequestBody Customer Customer) throws Exception{
 		String result=uImpl.deleteUser(Customer);
 		if(result==null){
-			throw new Exception("Customer doesn't exist!!");
+			throw new UserDoesNotExistException("Customer doesn't exist!!");
 		}
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
@@ -62,10 +68,43 @@ public class UserManagementController {
 	public ResponseEntity<String> deleteUserById(@PathVariable("uid") int uid) throws Exception{
 		String result=uImpl.deleteUserById(uid);
 		if(result==null){
-			throw new Exception("Customer doesn't exist!!");
+			throw new UserDoesNotExistException("Customer doesn't exist!!");
 		}
 		return new ResponseEntity<String>(result,HttpStatus.OK);
 	}
+	
+	@ExceptionHandler(UserAlreadyExistsException.class)
+    public ResponseEntity<ExceptionResponse> handleException(UserAlreadyExistsException e) {
+       ExceptionResponse response=new ExceptionResponse();
+       response.setErrorCode("CONFLICT");
+      response.setErrorMessage(e.getMessage());
+      response.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.CONFLICT);
+        
+    }
+	
+	@ExceptionHandler(UserDoesNotExistException.class)
+    public ResponseEntity<ExceptionResponse> handleException(UserDoesNotExistException e) {
+       ExceptionResponse response=new ExceptionResponse();
+       response.setErrorCode("CONFLICT");
+      response.setErrorMessage(e.getMessage());
+      response.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.CONFLICT);
+        
+    }
+	
+	@ExceptionHandler(IncorrectValueException.class)
+    public ResponseEntity<ExceptionResponse> handleException(IncorrectValueException e) {
+       ExceptionResponse response=new ExceptionResponse();
+       response.setErrorCode("CONFLICT");
+      response.setErrorMessage(e.getMessage());
+      response.setTimestamp(LocalDateTime.now());
+
+        return new ResponseEntity<ExceptionResponse>(response, HttpStatus.CONFLICT);
+        
+    }
 	
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception e){
