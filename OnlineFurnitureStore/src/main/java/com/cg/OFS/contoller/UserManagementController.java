@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -28,8 +29,9 @@ public class UserManagementController {
 	@Autowired
 	UserManagementServiceImpl uImpl;
 	
-	public ResponseEntity<Boolean> loginUser(String username,String password) throws IncorrectValueException{
-		Boolean result = uImpl.loginUser(username, password);
+	@GetMapping("/validateUser/{username}/{password}/{role}")
+	public ResponseEntity<Boolean> loginUser(@PathVariable("username") String username,@PathVariable("password")String password,@PathVariable("role")String role) throws IncorrectValueException{
+		Boolean result = uImpl.loginUser(username, password,role);
 		if(result) {
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 		}

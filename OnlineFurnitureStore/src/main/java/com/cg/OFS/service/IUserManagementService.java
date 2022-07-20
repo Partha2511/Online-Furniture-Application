@@ -4,7 +4,7 @@ import com.cg.OFS.model.Customer;
 
 public interface IUserManagementService {
 	
-	public boolean loginUser(String username,String password);
+	public boolean loginUser(String username,String password,String role);
 	public Customer registerNewUser(Customer Customer);
 	public Customer updateUser(Customer Customer);
 	public String deleteUser(Customer Customer);

@@ -15,10 +15,11 @@ public class UserManagementServiceImpl implements IUserManagementService {
 	IUserManagementRepository userRepo;
 
 	@Override
-	public boolean loginUser(String username, String password) {
+	public boolean loginUser(String username, String password,String role) {
 		List<Customer> users = userRepo.findAll();
 		for (Customer u : users) {
-			if (u.getUsername().equals(username) && u.getPassword().equals(password)) {
+			if (u.getUsername().equals(username) && u.getPassword().equals(password)
+					&& u.getRole().equals(role)) {
 				return true;
 			}
 		}
