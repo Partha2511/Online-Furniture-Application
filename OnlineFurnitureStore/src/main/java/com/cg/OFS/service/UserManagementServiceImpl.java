@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cg.OFS.dao.IAddressRepository;
 import com.cg.OFS.dao.IUserManagementRepository;
+import com.cg.OFS.model.Address;
 import com.cg.OFS.model.Customer;
 
 @Service
@@ -13,23 +15,30 @@ public class UserManagementServiceImpl implements IUserManagementService {
 
 	@Autowired
 	IUserManagementRepository userRepo;
+	@Autowired
+	IAddressRepository aRepo;
 
 	@Override
-	public boolean loginUser(String username, String password,String role) {
+	public Customer loginUser(String username, String password,String role) {
 		List<Customer> users = userRepo.findAll();
 		for (Customer u : users) {
 			if (u.getUsername().equals(username) && u.getPassword().equals(password)
 					&& u.getRole().equals(role)) {
-				return true;
+				return u;
 			}
 		}
-		return false;
+		return null;
 	}
 
 	@Override
 	public Customer registerNewUser(Customer Customer) {
-		userRepo.save(Customer);
-		return Customer;
+		List<Address> addresses = Customer.getAddresses();
+		Customer cust = userRepo.save(Customer);
+		for(Address a:addresses) {
+			a.setCustomer(cust);
+			aRepo.save(a);
+		}
+		return cust;
 	}
 
 	@Override

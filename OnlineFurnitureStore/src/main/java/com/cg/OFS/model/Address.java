@@ -21,7 +21,7 @@ public class Address {
 	private String pincode;
 	
 	@JsonIgnore
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	private Customer customer;
 	
 	public Address() {

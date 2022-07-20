@@ -38,6 +38,10 @@ public class OrderController{
 		}
 		return new ResponseEntity<List<Order>>(order,HttpStatus.OK);
 	}
+	@GetMapping("/getOrderById/{orderId}")
+	public ResponseEntity<Order> getOrderById(@PathVariable("orderId")int orderId){
+		return new ResponseEntity<Order>(impl.getOrderById(orderId),HttpStatus.OK);
+	}
 	
 	@GetMapping("/status/{status}")
 	public ResponseEntity<List<Order>> getOrderByStatus(@PathVariable("status")String status) throws Exception{

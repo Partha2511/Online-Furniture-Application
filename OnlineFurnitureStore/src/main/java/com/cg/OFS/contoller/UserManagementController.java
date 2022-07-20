@@ -30,10 +30,10 @@ public class UserManagementController {
 	UserManagementServiceImpl uImpl;
 	
 	@GetMapping("/validateUser/{username}/{password}/{role}")
-	public ResponseEntity<Boolean> loginUser(@PathVariable("username") String username,@PathVariable("password")String password,@PathVariable("role")String role) throws IncorrectValueException{
-		Boolean result = uImpl.loginUser(username, password,role);
-		if(result) {
-		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
+	public ResponseEntity<Customer> loginUser(@PathVariable("username") String username,@PathVariable("password")String password,@PathVariable("role")String role) throws IncorrectValueException{
+		Customer result = uImpl.loginUser(username, password,role);
+		if(result!=null) {
+		return new ResponseEntity<Customer>(result, HttpStatus.OK);
 		}
 		throw new IncorrectValueException("Incorrect Username and Password !!!");
 		

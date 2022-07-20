@@ -15,6 +15,7 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	
 	@Autowired
 	private IFurnitureRepository fms;
+	
 
 	@Override
 	public List<Furniture> getAllFurnitures() {
@@ -65,9 +66,25 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	@Transactional
 	public String deleteFurnitureById(long furnitureId) {
 		Furniture delFurniture=getFurnitureById(furnitureId);
+		System.out.println(delFurniture);
 		if(delFurniture==null){
 			return null;
 		}
+//		for(Cart c:delFurniture.getCarts()) {
+//			List<Furniture> lf =c.getFurnitures();
+//			List<Furniture> nf = new ArrayList<Furniture>();
+//			for(Furniture f:lf) {
+//				if(f.getFurnitureId()==furnitureId) {
+//					nf.add(f);
+//				}
+//			}
+//			c.setFurnitures(nf);
+//			cRepo.save(c);
+//		}
+		delFurniture.setCarts(null);
+		
+		
+		fms.save(delFurniture);
 		fms.deleteFurnitureByFurnitureId(furnitureId);
 		return delFurniture.getFurnitureName();
 	}

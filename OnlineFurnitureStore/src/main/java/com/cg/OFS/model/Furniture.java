@@ -35,6 +35,8 @@ public class Furniture {
     private String furnitureModel;
     @Column(name = "Price")
     private double price;
+    @Column(name="ImgUrl")
+    private String imgUrl;
 
 	
 	@OneToMany(mappedBy="furniture",cascade=CascadeType.ALL)
@@ -96,6 +98,12 @@ public class Furniture {
 	}
 	public void setCarts(List<Cart> carts) {
 		this.carts = carts;
+	}
+	public String getImgUrl() {
+		return imgUrl;
+	}
+	public void setImgUrl(String imgUrl) {
+		this.imgUrl = imgUrl;
 	}
 
     

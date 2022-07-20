@@ -20,6 +20,10 @@ public class OrderServiceImpl implements IOrderService{
 		List<Order> orders= repo.findAll();
 		return orders;
 	}
+	
+	public Order getOrderById(int orderId) {
+		return repo.findById(orderId).get();
+	}
 
 	@Override
 	public List<Order> getOrderByStatus(String status) {

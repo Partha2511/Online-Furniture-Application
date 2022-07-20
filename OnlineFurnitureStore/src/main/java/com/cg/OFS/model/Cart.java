@@ -34,7 +34,7 @@ public class Cart {
 	
 	@ManyToMany
 	@JoinTable(name="cart_furniture"
-	,joinColumns= {@JoinColumn(name="card_id")}
+	,joinColumns= {@JoinColumn(name="cart_id")}
 	,inverseJoinColumns= {@JoinColumn(name="furniture_id")})
 	private List<Furniture> furnitures = new ArrayList<Furniture>();
 	
