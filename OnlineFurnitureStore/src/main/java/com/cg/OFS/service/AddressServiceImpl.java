@@ -46,9 +46,10 @@ public class AddressServiceImpl implements IAddressService{
 	}
 
 	@Override
-	public Address deleteAddress(int userId, Address address) {
+	public Address deleteAddress(int userId, int aid) {
 		if(cRepo.existsById(userId)){
-			if(aRepo.existsById(address.getAid())){
+			if(aRepo.existsById(aid)){
+				Address address= aRepo.findById(aid).get();
 				address.setCustomer(null);
 				aRepo.save(address);
 				aRepo.delete(address);

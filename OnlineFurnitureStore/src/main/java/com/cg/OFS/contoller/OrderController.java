@@ -53,6 +53,11 @@ public class OrderController{
 		
 	}
 	
+	@GetMapping("/getOrderByCustomer/{custId}")
+	public ResponseEntity<List<Order>> getOrderByCustomer(@PathVariable("custId")int custId){
+		return new ResponseEntity<List<Order>>(impl.getOrderByCustomer(custId),HttpStatus.OK);
+	}
+	
 	@PutMapping("/updateOrder")
 	public ResponseEntity  <Order> updateOrder(@RequestBody Order order) throws Exception{
 		Order updateOrder= impl.updateOrder(order);

@@ -48,9 +48,9 @@ public class AddressController {
 		throw new AddressNotFound("Sorry this address doesn't exist");
 	}
 	
-	@DeleteMapping("/address/{userId}")
-	public ResponseEntity<Address> deleteAddress(@PathVariable("userId") int userId,@RequestBody Address address) throws AddressNotFound{
-		Address deletedAddress=aImpl.deleteAddress(userId, address);
+	@DeleteMapping("/address/{userId}/{aid}")
+	public ResponseEntity<Address> deleteAddress(@PathVariable("userId") int userId,@PathVariable("aid") int aid) throws AddressNotFound{
+		Address deletedAddress=aImpl.deleteAddress(userId, aid);
 		if(deletedAddress!=null){
 			return new ResponseEntity<Address>(deletedAddress, HttpStatus.OK);
 		}
