@@ -1,6 +1,12 @@
 package com.cg.OFS.model;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -11,12 +17,16 @@ public class Address {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int Aid;
+	//@NotBlank(message = "City is mandatory")
 	@Column(name="City", length=30)
 	private String city;
+	//@NotBlank(message = "State is mandatory")
 	@Column(name="State", length=30)
 	private String state;
+	//@NotBlank(message = "Country is mandatory")
 	@Column(name="Country", length=30)
 	private String country;
+	//@NotBlank(message = "Pincode is mandatory")
 	@Column(name="Pincode", length=30)
 	private String pincode;
 	

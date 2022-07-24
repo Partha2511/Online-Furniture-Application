@@ -22,8 +22,10 @@ public class Customer extends User{
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "customer")
 	private List<Account> accounts=new ArrayList<Account>();
+	//@NotBlank(message = "Mobile Number is mandatory")
 	@Column(name="Mobile_No", length=30)
 	private String mobileNo;
+	//@NotBlank(message = "Email is mandatory")
 	@Column(name="Email", length=30)
 	private String email;
 	@OneToOne(cascade=CascadeType.ALL)

@@ -32,11 +32,13 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	}
 
 	@Override
+	@Transactional
 	public Furniture registerFurniture(Furniture furniture) {
 		return fms.save(furniture);
 	}
-
+  
 	@Override
+	@Transactional
 	public Furniture updateFurniture(Furniture furniture) {
 		if(getFurnitureById(furniture.getFurnitureId())!=null){
 			return fms.save(furniture);
@@ -45,6 +47,7 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	}
 
 	@Override
+	@Transactional
 	public Furniture updateFurnitureById(long furnitureId,Furniture furniture) {
 		if(getFurnitureById(furnitureId)==null){
 			return null;
@@ -53,6 +56,7 @@ public class FurnitureManagementImpl implements IFurnitureManagementService {
 	}
 
 	@Override
+	@Transactional
 	public String deleteFurniture(Furniture furniture) {
 		Furniture delFurniture=getFurnitureById(furniture.getFurnitureId());
 		if(delFurniture==null){

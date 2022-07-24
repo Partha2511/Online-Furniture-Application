@@ -29,10 +29,10 @@ public class Order {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "Id")
 	private Integer orderId;
-	
+	//@NotBlank(message = "Order Date is mandatory")
 	@Column(name = "OrderDate")
 	private LocalDate orderDate;
-	
+	//@NotBlank(message = "Furniture is mandatory")
 	@ManyToMany(cascade = CascadeType.ALL)
 	@JoinTable(name="order_furniture"
 	,joinColumns= {@JoinColumn(name="order_id")}
@@ -46,13 +46,15 @@ public class Order {
 	,inverseJoinColumns= {@JoinColumn(name="cust_id")})
 	private List<Customer> customers= new ArrayList<Customer>();
 	
+	//@NotBlank(message = "Quantity is mandatory")
 	@Column(name = "Quantity")
 	private int quantity;
 	
+	//@NotBlank(message = "Price is mandatory")
 	@Column(name = "Price")
 	private double price;
 	
-	
+	//@NotBlank(message = "Status is mandatory")
 	@Column(name = "Status")
 	private String status;
 	

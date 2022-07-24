@@ -18,8 +18,10 @@ public class Review {
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="review_id")
 	private int reviewId;
+	//@NotBlank(message = "Description is mandatory")
 	@Column(name="description")
 	private String description;
+	//@NotBlank(message = "Rating is mandatory")
 	@Column(name="review_rating")
 	private int reviewRating;
 	@JsonIgnore
