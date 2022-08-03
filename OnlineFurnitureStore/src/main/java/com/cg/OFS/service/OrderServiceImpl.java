@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cg.OFS.dao.IOrderServiceRepository;
-import com.cg.OFS.model.Customer;
 import com.cg.OFS.model.Order;
 
 
